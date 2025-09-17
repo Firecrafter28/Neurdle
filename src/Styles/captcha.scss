@@ -1,0 +1,27 @@
+@use "theme";
+
+#captcha-container {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--popup-bg);
+    border-radius: 32px;
+    width: 40rem;
+    height: 20rem;
+    backdrop-filter: blur(5px);
+    z-index: 101;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#captcha-modal {
+    background: #0009;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 100;
+}

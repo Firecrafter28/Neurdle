@@ -29,14 +29,48 @@
     <link rel="manifest" href="site.webmanifest" />
     <meta
         http-equiv="Content-Security-Policy"
-        content="script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com;
+        content="script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://challenges.cloudflare.com;
                  img-src 'self' data: https://www.googletagmanager.com;
-                 connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com;
-                 frame-src 'self' https://www.googletagmanager.com;"
+                 connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://challenges.cloudflare.com;
+                 frame-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com;"
     >
   </head>
 
   <body class="dark">
+    <script async defer src="https://challenges.cloudflare.com/turnstile/v0/api.js"></script>
+    <!-- TODO: Uncomment this after testing -->
+    <!-- <div class="cf-turnstile"
+         data-sitekey="0x4AAAAAAB0jX0eELrSZFThL"
+         data-theme="dark"
+         data-size="normal"
+    ></div> -->
+    <div id="captcha-modal"></div>
+    <div id="captcha-container">
+        <div class="cf-turnstile"
+             data-sitekey="1x00000000000000000000AA"
+             data-theme="dark"
+             data-size="normal",
+             data-callback="onSuccess"
+        ></div>
+    </div>
+    <script>
+    function onSuccess(token) {
+        console.log(`[Turnstile] Challenge Success: ${token}`);
+    }
+
+    function onError(errorCode) {
+        console.error(`[Turnstile] Challenge Error: ${errorCode}`);
+    }
+
+    function onExpired() {
+        console.warn("[Turnstile] Token expired");
+    }
+
+    function onTimeout() {
+        console.warn("[Turnstile] Challenge timed out");
+    }
+    </script>
+
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MGP4QGR2"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
